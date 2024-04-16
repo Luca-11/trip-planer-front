@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #2f2e2b;
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url(../assets/fonts/Lora-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Lora-Bold";
+  src: url(../assets/fonts/Lora-Bold.ttf);
+}
+
+@font-face {
+  font-family: "Lora-Italic";
+  src: url(../assets/fonts/Lora-Italic.ttf);
+}
+
+h1 {
+  color: #ffff;
+  font-size: 32px;
+  margin: 0;
+  text-align: center;
+  padding: 24px 0px 8px 0px;
+  font-family: "Lora-Bold";
+}
+
+h2 {
+  color: #958f7e;
+  font-size: 16px;
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  font-family: "Lora";
+}
+
+h3 {
+  color: #958f7e;
+  font-size: 16px;
+  margin: 0;
+  font-family: "Lora";
+}
+
+p,
+button {
+  font-family: "Lora";
+}
