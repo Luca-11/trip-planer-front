@@ -1,17 +1,11 @@
 <script setup>
-// Importing necessary modules from vue, vue-router
 import router from "@/router";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 
-// Creating reactive references for popup visibility and new prompt
 const showPopup = ref(false);
 const newPrompt = ref("");
-
-// Getting the current route
 const route = useRoute();
-
-// Extracting the id from the route parameters
 const id = route.params.id;
 
 // Defining an emit function for the "prompt-update" event
@@ -31,7 +25,6 @@ const closePopup = () => {
 // Function to update the prompt
 const updatePrompt = async () => {
   try {
-    // Making a PATCH request to the server with the new prompt
     await fetch(`http://localhost:3000/v1/itinerary/${id}`, {
       method: "PATCH",
       headers: {
@@ -47,7 +40,6 @@ const updatePrompt = async () => {
     router.push(`/${id}`);
     window.location.reload();
   } catch (error) {
-    // Logging any error that occurs during the request
     console.error(error);
   }
 };

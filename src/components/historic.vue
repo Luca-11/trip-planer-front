@@ -1,5 +1,4 @@
 <script setup>
-// Importing necessary modules from vue
 import { onMounted, ref } from "vue";
 
 // Creating a reactive reference for itinerary
@@ -7,41 +6,31 @@ const itinerary = ref([]);
 
 // Function to fetch itinerary from the server
 const fetchItinerary = async () => {
-  // Making a GET request to the server
   const response = await fetch("http://localhost:3000/v1/itinerary");
-  // Parsing the response to JSON
   const data = await response.json();
-  // Sorting the data by updated_at in descending order
   data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-
-  // Updating the itinerary value with the sorted data
   itinerary.value = data;
-  // Logging the data for debugging purposes
   console.log(data);
 };
 
 // Function to be executed when the component is mounted
 onMounted(() => {
-  // Fetching the itinerary
   fetchItinerary();
 });
 </script>
 
 <template>
   <div>
-    <!-- Title for the last itineraries -->
     <h3>Derniers itinéraires</h3>
-    <!-- Loop over the last 4 items in the itinerary -->
+
     <div
       class="historic-main"
       v-for="item in itinerary.slice(-4)"
       :key="item.id"
     >
-      <!-- Router link to the item's page -->
       <RouterLink :to="`/${item.id}`" class="btn">
-        <!-- Displaying the item's prompt -->
         <p>{{ item.prompt }}</p>
-        <!-- Arrow icon -->
+
         <img src="@/assets/icons/arrow.png" alt="arrow" />
       </RouterLink>
     </div>
