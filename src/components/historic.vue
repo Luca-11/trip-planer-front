@@ -23,10 +23,10 @@ onMounted(() => {
       v-for="item in itinerary.slice(0, 4)"
       :key="item.id"
     >
-      <div class="btn">
+      <RouterLink :to="`/${item.id}`" class="btn">
         <p>{{ item.prompt }}</p>
         <img src="@/assets/icons/arrow.png" alt="arrow" />
-      </div>
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -53,6 +53,7 @@ onMounted(() => {
   padding: 12px;
   width: -webkit-fill-available;
   justify-content: space-between;
+  text-decoration: none;
 }
 
 .btn p {

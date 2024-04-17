@@ -1,14 +1,34 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
+
+const location = ref("");
+const router = useRouter();
+
+const go = async () => {
+  try {
+    const response = await axios.post("http://localhost:3000/v1/itinerary", {
+      prompt: location.value,
+    });
+    router.push(`/${response.data.id}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+</script>
 
 <template>
   <div class="container">
-    <input type="text" placeholder="Enter a location" />
+    <input type="text" v-model="location" placeholder="Enter a location" />
     <div class="btn">
-      <button class="go">C'est parti</button>
+      <button class="go" @click="go">C'est parti</button>
       <button class="exemple">Voir un exemple</button>
     </div>
   </div>
 </template>
+
+<!-- ... -->
 
 <style scoped>
 .container {
