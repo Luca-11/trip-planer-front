@@ -1,26 +1,37 @@
 <script setup>
+// Importing necessary modules from vue, vue-router
 import router from "@/router";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
+
+// Creating reactive references for popup visibility and new prompt
 const showPopup = ref(false);
 const newPrompt = ref("");
 
+// Getting the current route
 const route = useRoute();
+
+// Extracting the id from the route parameters
 const id = route.params.id;
 
+// Defining an emit function for the "prompt-update" event
 const emit = defineEmits(["prompt-update"]);
 
+// Function to open the popup and set the new prompt
 const openPopup = (itinerary) => {
   showPopup.value = true;
   newPrompt.value = itinerary.prompt;
 };
 
+// Function to close the popup
 const closePopup = () => {
   showPopup.value = false;
 };
 
+// Function to update the prompt
 const updatePrompt = async () => {
   try {
+    // Making a PATCH request to the server with the new prompt
     await fetch(`http://localhost:3000/v1/itinerary/${id}`, {
       method: "PATCH",
       headers: {
@@ -29,16 +40,19 @@ const updatePrompt = async () => {
       body: JSON.stringify({ prompt: newPrompt.value }),
     });
 
+    // Emitting the "prompt-update" event with the id
     emit("prompt-update", id);
 
-    // closePopup();
+    // Navigating to the route with the id and reloading the page
     router.push(`/${id}`);
     window.location.reload();
   } catch (error) {
+    // Logging any error that occurs during the request
     console.error(error);
   }
 };
 
+// Exposing the openPopup function
 defineExpose({
   openPopup,
 });
@@ -48,7 +62,9 @@ defineExpose({
   <div v-if="showPopup" class="popup" @click="closePopup">
     <div class="popup-content" @click.stop>
       <h2>Modifier le prompt</h2>
+
       <textarea v-model="newPrompt" rows="4" cols="50"></textarea>
+
       <div class="buttons">
         <button class="update" @click="updatePrompt">Mettre à jour</button>
         <button class="cancel" @click="closePopup">Annuler</button>
