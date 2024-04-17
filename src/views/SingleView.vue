@@ -1,9 +1,12 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
-import L from "leaflet";
+import { useRoute, useRouter } from "vue-router";
+import Map from "@/components/Map.vue";
+import Popup from "@/components/Popup.vue";
 
 const itinerary = ref([]);
+const popup = ref(null);
+const router = useRouter();
 
 const fetchItineraryById = async (id) => {
   const response = await fetch(`http://localhost:3000/v1/itinerary/${id}`);
@@ -12,23 +15,15 @@ const fetchItineraryById = async (id) => {
   console.log(data);
 };
 
-onMounted(() => {
+onMounted(async () => {
   const route = useRoute();
   const id = route.params.id;
-  fetchItineraryById(id);
+  await fetchItineraryById(id);
 });
-
-var map = L.map("map").setView([51.505, -0.09], 13);
-
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution:
-    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(map);
 </script>
 
 <template>
-  <div id="map"></div>
+  <Map />
   <main>
     <div class="top-trip">
       <div class="left">
@@ -36,7 +31,12 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       </div>
 
       <div class="right">
-        <img src="../assets/icons/edit.png" alt="edit" />
+        <img
+          src="@/assets/icons/edit.png"
+          alt="edit"
+          @click="popup.openPopup(itinerary)"
+        />
+        <Popup ref="popup" @update="(id) => fetchItineraryById(id)" />
       </div>
     </div>
     <div>
@@ -134,9 +134,5 @@ li {
   padding: 10px 0;
   font-family: "Lora";
   color: #cecece;
-}
-
-#map {
-  height: 180px;
 }
 </style>

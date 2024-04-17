@@ -6,6 +6,8 @@ const itinerary = ref([]);
 const fetchItinerary = async () => {
   const response = await fetch("http://localhost:3000/v1/itinerary");
   const data = await response.json();
+  data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+
   itinerary.value = data;
   console.log(data);
 };
@@ -20,7 +22,7 @@ onMounted(() => {
     <h3>Derniers itinéraires</h3>
     <div
       class="historic-main"
-      v-for="item in itinerary.slice(0, 4)"
+      v-for="item in itinerary.slice(-4)"
       :key="item.id"
     >
       <RouterLink :to="`/${item.id}`" class="btn">
