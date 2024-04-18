@@ -6,9 +6,11 @@ const itinerary = ref([]);
 
 // Function to fetch itinerary from the server
 const fetchItinerary = async () => {
-  const response = await fetch("http://localhost:3000/v1/itinerary");
+  const response = await fetch(
+    "http://localhost:3000/v1/itinerary?limit=5&sort=date&order=desc"
+  );
   const data = await response.json();
-  data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+  // data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
   itinerary.value = data;
   console.log(data);
 };

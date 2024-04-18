@@ -4,12 +4,11 @@ import "leaflet/dist/leaflet.css";
 import { useRoute } from "vue-router";
 
 export default {
-  // Defining the component's data
-  data() {
-    return {
-      // An array to store the locations fetched from the server
-      locations: [],
-    };
+  props: {
+    locations: {
+      type: Array,
+      required: true,
+    },
   },
 
   // A lifecycle hook that is called when the component is mounted
@@ -28,9 +27,9 @@ export default {
     }).addTo(map);
 
     // Fetching the itinerary by id from the server
-    const response = await fetch(`http://localhost:3000/v1/itinerary/${id}`);
-    const data = await response.json();
-    this.locations = data.iaResponse;
+    // const response = await fetch(`http://localhost:3000/v1/itinerary/${id}`);
+    // const data = await response.json();
+    // this.locations = data.iaResponse;
 
     console.log(this.locations);
 
@@ -57,7 +56,7 @@ export default {
 <style scoped>
 #map {
   z-index: 0;
-  height: 60svh;
+  height: 40vh;
   width: 100%;
 }
 </style>

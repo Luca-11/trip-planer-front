@@ -8,10 +8,18 @@
 </template>
 
 <style scoped>
+.load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .loading-container {
   position: relative;
   display: flex;
   width: 50%;
+  height: fit-content;
   padding: 8px 24px;
   border-radius: 5px;
   background-color: #f3f3f3;
@@ -40,10 +48,5 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.load {
-  display: flex;
-  justify-content: center;
 }
 </style>

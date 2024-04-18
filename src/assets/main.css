@@ -58,3 +58,9 @@ p,
 button {
   font-family: "Lora";
 }
+
+.leaflet-control-attribution .leaflet-control,
+.leaflet-bottom,
+.leaflet-right {
+  opacity: 0 !important;
+}
