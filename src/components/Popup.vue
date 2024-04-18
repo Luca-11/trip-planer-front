@@ -66,13 +66,19 @@ defineExpose({
 </template>
 
 <style scoped>
+h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #cecece;
+}
+
 .popup {
   position: fixed;
-  top: 0;
-  left: 0;
+  display: flex;
   width: 100%;
   height: 100%;
-  display: flex;
+  top: 0;
+  left: 0;
   justify-content: center;
   align-items: center;
   z-index: 1;
@@ -81,33 +87,36 @@ defineExpose({
 .popup::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 .popup-content {
   position: relative;
-  background-color: #cecece;
+  width: 70%;
+  height: auto;
+  min-height: 30%;
   padding: 2rem;
   border-radius: 8px;
+  background-color: #2f2e2b;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 2;
-  width: 70%;
-  height: 30%;
   overflow: auto;
 }
 
 .popup textarea {
-  background-color: #2f2e2b;
-  width: -webkit-fill-available;
-  padding: 32px 25px;
+  width: 100%;
+  padding: 24px 16px;
   border: 1px solid #958f7e;
   border-radius: 5px;
+  background-color: #242321;
   color: white;
+  box-sizing: border-box;
   font-family: "Lora";
+  font-size: 16px;
 }
 
 .popup .btn {
@@ -117,11 +126,11 @@ defineExpose({
 }
 
 .popup .go {
-  background-color: #958f7e;
-  color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
+  background-color: #958f7e;
+  color: white;
   cursor: pointer;
 }
 
@@ -132,40 +141,77 @@ defineExpose({
 }
 
 .popup .exemple {
-  background-color: #242321;
-  color: #cecece;
   padding: 10px 20px;
   border: 1px solid #958f7e;
   border-radius: 5px;
   margin-top: 1rem;
+  background-color: #242321;
+  color: #cecece;
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin-top: 16px;
 }
 
 .update {
+  padding: 16px 24px;
+  border: none;
   background-color: #958f7e;
   color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+  font-family: "Lora-Bold";
+  transition: transform 0.1s ease;
 }
 
 .update:disabled {
   background-color: #1a1815;
   color: #5f5f5f;
   cursor: not-allowed;
+  transform: none;
 }
 
 .cancel {
-  background-color: inherit;
-  color: #242321;
-  padding: 10px 20px;
+  padding: 16px 16px;
   border: 1px solid #958f7e;
-  border-radius: 5px;
-  margin-left: 1rem;
+  background-color: inherit;
+  color: #cecece;
+  transition: transform 0.1s ease;
+}
+
+.update:active,
+.cancel:active {
+  transform: scale(0.95);
+}
+
+.cancel:disabled {
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  .popup-content {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .update,
+  .cancel {
+    padding: 10px 20px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .update,
+  .cancel {
+    margin-top: 10px;
+  }
 }
 </style>

@@ -56,8 +56,8 @@ export default {
 
 <style scoped>
 #map {
+  z-index: 0;
   height: 60svh;
   width: 100%;
-  z-index: 0;
 }
 </style>

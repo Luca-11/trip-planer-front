@@ -57,7 +57,8 @@ onMounted(() => {
   align-items: center;
   font-size: 14px;
   padding: 12px;
-  width: -webkit-fill-available;
+  width: 100%;
+  box-sizing: border-box;
   justify-content: space-between;
   text-decoration: none;
 }

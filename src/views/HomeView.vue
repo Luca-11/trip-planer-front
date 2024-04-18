@@ -1,6 +1,6 @@
 <script setup>
-import Historic from "@/components/historic.vue";
-import InputPrompt from "@/components/InputPrompt.vue";
+import HistoricaList from "@/components/HistoricalList.vue";
+import PromptBox from "@/components/PromptBox.vue";
 </script>
 
 <template>
@@ -14,8 +14,8 @@ import InputPrompt from "@/components/InputPrompt.vue";
   </header>
 
   <main>
-    <InputPrompt />
-    <Historic />
+    <PromptBox />
+    <HistoricaList />
   </main>
 </template>
 
@@ -34,6 +34,6 @@ header img {
 }
 
 main {
-  padding: 0 64px;
+  padding: 0 32px;
 }
 </style>

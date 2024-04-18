@@ -139,4 +139,26 @@ li {
   font-family: "Lora";
   color: #cecece;
 }
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  .step {
+    width: 100%;
+  }
+
+  .step p {
+    font-size: 16px;
+  }
+
+  .number {
+    font-size: 56px;
+  }
+}
 </style>
