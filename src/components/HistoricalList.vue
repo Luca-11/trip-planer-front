@@ -3,12 +3,11 @@ import { onMounted, ref } from "vue";
 
 // Creating a reactive reference for itinerary
 const itinerary = ref([]);
+const url_api = import.meta.env.VITE_APP_URL_API;
 
 // Function to fetch itinerary from the server
 const fetchItinerary = async () => {
-  const response = await fetch(
-    "http://localhost:3000/v1/itinerary?limit=5&sort=date&order=desc"
-  );
+  const response = await fetch(`${url_api}/v1/itinerary`);
   const data = await response.json();
   // data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
   itinerary.value = data;

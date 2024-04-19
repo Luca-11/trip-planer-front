@@ -11,10 +11,11 @@ const popup = ref(null);
 const router = useRouter();
 const newPrompt = ref("");
 const isLoading = ref(false);
+const url_api = import.meta.env.VITE_APP_URL_API;
 
 // Function to fetch itinerary by id from the server
 const fetchItineraryById = async (id) => {
-  const response = await fetch(`http://localhost:3000/v1/itinerary/${id}`);
+  const response = await fetch(`${url_api}/v1/itinerary/${id}`);
   const data = await response.json();
   itinerary.value = data;
   newPrompt.value = data.prompt;
@@ -25,7 +26,7 @@ const fetchItineraryById = async (id) => {
 const updatePrompt = async (id) => {
   isLoading.value = true;
   try {
-    await fetch(`http://localhost:3000/v1/itinerary/${itinerary.value.id}`, {
+    await fetch(`${url_api}/v1/itinerary/${itinerary.value.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -34,9 +35,9 @@ const updatePrompt = async (id) => {
     });
 
     // Navigating to the route with the id and reloading the page
-    // router.push(`/${id}`);
+    router.push(`/${id}`);
     // router.push({ name: 'single', params: { id } );
-    // window.location.reload();
+    window.location.reload();
     await fetchItineraryById(id);
   } catch (error) {
     console.error(error);

@@ -8,12 +8,13 @@ import Loading from "@/components/Loading.vue";
 const location = ref("");
 const router = useRouter();
 const isLoading = ref(false);
+const url_api = import.meta.env.VITE_APP_URL_API;
 
 // Function to make a POST request to the server
 const go = async () => {
   isLoading.value = true;
   try {
-    const response = await axios.post("http://localhost:3000/v1/itinerary", {
+    const response = await axios.post(`${url_api}/v1/itinerary`, {
       prompt: location.value,
     });
     router.push(`/${response.data.id}`);
@@ -34,7 +35,7 @@ const go = async () => {
       <textarea
         v-model="location"
         type="text"
-        placeholder="Enter a location"
+        placeholder="Entrez une location..."
       ></textarea>
 
       <div class="btn">
